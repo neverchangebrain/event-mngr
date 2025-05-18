@@ -100,14 +100,6 @@ describe('UsersService', () => {
       const mockUsers = [mockUserWithoutPassword, mockUserWithoutPassword];
 
       (prismaService.user.findMany as jest.Mock).mockResolvedValue(mockUsers);
-
-      // Method not implemented in the class
-      // const result = await service.findAll();
-
-      // expect(result).toEqual(mockUsers);
-      // expect(prismaService.user.findMany).toHaveBeenCalledWith({
-      //   select: expect.any(Object)
-      // });
     });
   });
   describe('findById', () => {

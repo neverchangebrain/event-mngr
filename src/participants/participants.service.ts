@@ -11,10 +11,8 @@ export class ParticipantsService {
   ) {}
 
   async register(userId: number, registerDto: RegisterParticipantDto) {
-    // Get the event
     const event = await this.eventsService.findOne(registerDto.eventId);
 
-    // Check if event is full
     const currentParticipants = await this.prisma.participant.count({
       where: {
         eventId: registerDto.eventId
@@ -25,7 +23,6 @@ export class ParticipantsService {
       throw new BadRequestException('Досягнуто максимальну кількість учасників для цієї події');
     }
 
-    // Check if user is already registered
     const existingRegistration = await this.prisma.participant.findUnique({
       where: {
         userId_eventId: {
@@ -39,7 +36,6 @@ export class ParticipantsService {
       throw new ConflictException('Користувач вже зареєстрований на цю подію');
     }
 
-    // Register the user
     return this.prisma.participant.create({
       data: {
         userId,
@@ -73,7 +69,7 @@ export class ParticipantsService {
   }
 
   async getEventParticipants(eventId: number) {
-    await this.eventsService.findOne(eventId); // Validate that event exists
+    await this.eventsService.findOne(eventId);
 
     return this.prisma.participant.findMany({
       where: {

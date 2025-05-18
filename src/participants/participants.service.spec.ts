@@ -59,16 +59,10 @@ describe('ParticipantsService', () => {
     };
 
     it('should register a participant successfully', async () => {
-      // Mock event service to return an event
       (eventsService.findOne as jest.Mock).mockResolvedValue(event);
-
-      // Mock count to return value less than max participants
       (prismaService.participant.count as jest.Mock).mockResolvedValue(5);
-
-      // Mock findUnique to return null (user not already registered)
       (prismaService.participant.findUnique as jest.Mock).mockResolvedValue(null);
 
-      // Mock create to return the participant
       const participant = {
         id: 1,
         userId,
@@ -93,7 +87,7 @@ describe('ParticipantsService', () => {
 
     it('should throw BadRequestException if event is full', async () => {
       (eventsService.findOne as jest.Mock).mockResolvedValue(event);
-      (prismaService.participant.count as jest.Mock).mockResolvedValue(10); // Full
+      (prismaService.participant.count as jest.Mock).mockResolvedValue(10);
 
       await expect(service.register(userId, registerDto)).rejects.toThrow(BadRequestException);
       expect(prismaService.participant.create).not.toHaveBeenCalled();

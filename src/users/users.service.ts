@@ -8,7 +8,6 @@ export class UsersService {
   constructor(private prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
-    // Check if user with email or username already exists
     const existingUser = await this.prisma.user.findFirst({
       where: {
         OR: [{ email: createUserDto.email }, { username: createUserDto.username }]

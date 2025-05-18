@@ -44,7 +44,6 @@ describe('AppService', () => {
 
   describe('checkHealth', () => {
     it('should perform health check', async () => {
-      // Mock the health check service
       const healthCheckResult = {
         status: 'ok',
         info: { database: { status: 'up' }, api: { status: 'up' } },

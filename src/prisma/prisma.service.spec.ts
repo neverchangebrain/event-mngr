@@ -11,7 +11,6 @@ describe('PrismaService', () => {
 
     service = module.get<PrismaService>(PrismaService);
 
-    // Mock the connect and disconnect methods
     service.$connect = jest.fn();
     service.$disconnect = jest.fn();
   });

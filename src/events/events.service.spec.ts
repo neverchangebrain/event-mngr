@@ -164,7 +164,6 @@ describe('EventsService', () => {
     it('should throw NotFoundException when trying to update non-existent event', async () => {
       const updateEventDto = { name: 'Updated Event' };
 
-      // Mock the update to throw an error with the P2025 code
       (prismaService.event.update as jest.Mock).mockRejectedValue({
         code: 'P2025',
         message: 'Record to update not found'
@@ -186,7 +185,6 @@ describe('EventsService', () => {
     });
 
     it('should throw NotFoundException when trying to delete non-existent event', async () => {
-      // Mock the delete to throw an error with the P2025 code
       (prismaService.event.delete as jest.Mock).mockRejectedValue({
         code: 'P2025',
         message: 'Record to delete not found'
