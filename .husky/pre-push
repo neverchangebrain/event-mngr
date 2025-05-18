@@ -1,0 +1,41 @@
+#!/bin/sh
+
+protected_branch='canary'
+
+protected_remote_urls="\
+  git@github.com:neverchangebrain/event-mngr.git
+  https://github.com/neverchangebrain/event-mngr.git"
+
+remote_name="$1"
+remote_url="$2"
+
+is_remote_protected=0
+for protected_remote_url in $protected_remote_urls; do
+  if [ "$remote_url" = "$protected_remote_url" ]; then
+    is_remote_protected=1
+    break
+  fi
+done
+
+if [ "$is_remote_protected" = 0 ]; then
+  exit 0
+fi
+
+
+push_targets_protected_branch=0
+protected_ref="refs/heads/$protected_branch"
+while read -r _local_ref _local_sha remote_ref _remote_sha; do
+  if [ "$remote_ref" = "$protected_ref" ]; then
+    push_targets_protected_branch=1
+    break
+  fi
+done
+
+if [ "$push_targets_protected_branch" = "1" ]; then
+  echo "You probably didn't intend to push directly to '$protected_branch' on '$remote_name' ($remote_url)." >&2
+  echo "If you're sure that that's what you want to do, bypass this check via" >&2
+  echo "" >&2
+  echo "  git push --no-verify" >&2
+  echo "" >&2
+  exit 1
+fi
