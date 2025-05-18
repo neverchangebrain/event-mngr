@@ -1,10 +1,8 @@
 {
   "name": "event-mngr",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -20,7 +18,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "lint-staged": "lint-staged",
     "prepare": "husky",
-    "commit": "git add . && cz"
+    "commit": "cz-customizable",
+    "knip": "knip"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -43,9 +42,12 @@
     "@swc/core": "^1.10.7",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.10.7",
+    "@types/node": "^22.15.18",
     "@types/supertest": "^6.0.2",
-    "commitizen": "^4.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
+    "cross-env": "^7.0.3",
+    "cz-customizable": "^7.4.0",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",
@@ -81,5 +83,10 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   },
-  "packageManager": "yarn@4.9.1+sha512.f95ce356460e05be48d66401c1ae64ef84d163dd689964962c6888a9810865e39097a5e9de748876c2e0bf89b232d583c33982773e9903ae7a76257270986538"
+  "packageManager": "pnpm@9.6.0",
+  "config": {
+    "commitizen": {
+      "path": "cz-customizable"
+    }
+  }
 }

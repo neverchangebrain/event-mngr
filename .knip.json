@@ -1,0 +1,31 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "project": ["src/**", "scripts/**"],
+  "eslint": {
+    "config": "eslint.config.mjs"
+  },
+  "prettier": {
+    "config": ".prettierrc.json"
+  },
+  "github-actions": true,
+  "typescript": {
+    "config": ["tsconfig.json", "tsconfig.eslint.json"]
+  },
+  "rules": {
+    "files": "error",
+    "dependencies": "error",
+    "devDependencies": "error",
+    "unlisted": "error",
+    "binaries": "error",
+    "unresolved": "error",
+    "exports": "error",
+    "nsExports": "error",
+    "types": "error",
+    "nsTypes": "error",
+    "enumMembers": "error",
+    "classMembers": "error",
+    "duplicates": "error",
+    "optionalPeerDependencies": "error"
+  },
+  "includeEntryExports": true
+}
