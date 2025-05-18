@@ -9,7 +9,6 @@ describe('AppController (e2e)', () => {
   let prismaService: PrismaService;
   let jwtToken: string;
 
-  // Mock PrismaService
   const mockPrismaService = {
     user: {
       findUnique: jest.fn(),
@@ -105,13 +104,12 @@ describe('AppController (e2e)', () => {
         id: 1,
         username: 'testuser',
         email: 'test@example.com',
-        password: '$2b$10$abcdefghijklmnopqrstuv', // Mock hashed password
+        password: '$2b$10$abcdefghijklmnopqrstuv',
         createdAt: new Date()
       };
 
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
 
-      // Mock bcrypt.compare to return true
       jest.mock('bcrypt', () => ({
         compare: jest.fn().mockResolvedValue(true)
       }));
@@ -122,7 +120,7 @@ describe('AppController (e2e)', () => {
         .expect(200)
         .expect((res) => {
           expect(res.body).toHaveProperty('access_token');
-          jwtToken = res.body.access_token; // Save token for authenticated requests
+          jwtToken = res.body.access_token;
         });
     });
   });
