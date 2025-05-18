@@ -1,0 +1,45 @@
+# on myown vds
+#
+#             .-/+oossssoo+/-.               likeuser@machine
+#         `:+ssssssssssssssssss+:`           ----------------
+#       -+ssssssssssssssssssyyssss+-         OS: Ubuntu 24.04.2 LTS x86_64
+#     .ossssssssssssssssssdMMMNysssso.       Host: Virtual Machine Hyper-V UEFI Release v4.1
+#    /ssssssssssshdmmNNmmyNMMMMhssssss/      Kernel: 6.11.0-1013-azure
+#   +ssssssssshmydMMMMMMMNddddyssssssss+     Uptime: 10 days, 1 hour, 12 mins
+#  /sssssssshNMMMyhhyyyyhmNMMMNhssssssss/    Packages: 886 (dpkg), 4 (snap)
+# .ssssssssdMMMNhsssssssssshNMMMdssssssss.   Shell: bash 5.2.21
+# +sssshhhyNMMNyssssssssssssyNMMMysssssss+   Resolution: 1024x768
+# ossyNMMMNyMMhsssssssssssssshmmmhssssssso   Terminal: /dev/pts/2
+# ossyNMMMNyMMhsssssssssssssshmmmhssssssso   CPU: AMD EPYC 7763 (4) @ 3.195GHz
+# +sssshhhyNMMNyssssssssssssyNMMMysssssss+   Memory: 1974MiB / 15989MiB
+# .ssssssssdMMMNhsssssssssshNMMMdssssssss.
+#  /sssssssshNMMMyhhyyyyhdNMMMNhssssssss/
+#   +sssssssssdmydMMMMMMMMddddyssssssss+
+#    /ssssssssssshdmNNNNmyNMMMMhssssss/
+#     .ossssssssssssssssssdMMMNysssso.
+#       -+sssssssssssssssssyyyssss+-
+#         `:+ssssssssssssssssss+:`
+#             .-/+oossssoo+/-.
+#
+
+# likeuser@machine:~$ sudo docker ps
+# CONTAINER ID   IMAGE         COMMAND                  CREATED        STATUS        PORTS                                        NAMES
+# ad63ec4ccff0   postgres:15   "docker-entrypoint.s…"   2 hours ago    Up 2 hours     0.0.0.0:6543->5432/tcp, :::6543->5432/tcp   doom
+
+version: '3.9'
+services:
+  postgres:
+    image: postgres:15
+    container_name: doom
+    restart: always
+    ports:
+      - '6543:5432'
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: bro_dont_tell_this_to_anyone
+      POSTGRES_DB: doom
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
